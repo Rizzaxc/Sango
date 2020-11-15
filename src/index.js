@@ -16,4 +16,4 @@ app.use(express.static('dist'));
 
 
 app.use('/api/v1/search', rSearch);
-app.listen(port, () => console.log(`Backend listening on port ${port}!`))
+app.listen(port, () => console.log(`App running on port ${port}!`))
