@@ -5,7 +5,8 @@ import wanakana from 'wanakana';
 class mRedisSearch {
 
     constructor() {
-        this.redis = new Redis();
+        // Config for heroku
+        this.redis = new Redis(process.env.REDIS_URL);
         this.initializeDatabase();
     }
 
