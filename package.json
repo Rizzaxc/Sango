@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js"
-
   },
   "type": "module",
   "author": "Rizzaxc",
@@ -16,6 +15,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "ioredis": "^4.19.2",
+    "unofficial-jisho-api": "^2.0.12",
     "wanakana": "^4.0.2"
   },
   "engines": {

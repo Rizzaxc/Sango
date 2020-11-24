@@ -2,6 +2,8 @@ import Redis from 'ioredis';
 import fs from 'fs/promises';
 import wanakana from 'wanakana';
 
+import JishoApi from 'unofficial-jisho-api';
+const jishoApi = new JishoApi();
 class mRedisSearch {
 
     constructor() {
@@ -63,9 +65,17 @@ class mRedisSearch {
         }
     }
 
+    //TODO: Save the defs and index it
+    async fetchExternal(term) {
+        return "Come back later";
+        const jishoData = (await jishoApi.searchForPhrase(term)).data;
+        const englishDefinitions = jishoData[0].senses[0].english_definitions;
+        return englishDefinitions;
+    }
+
     async generic(term) {
-        if (wanakana.isKanji(term)) {
-            return await this.kanji(term);
+        if (term.length === 1 && wanakana.isKanji(term)) {
+            return [await this.kanji(term)];
         }
 
         const katakana = wanakana.toKatakana(term);
@@ -85,8 +95,8 @@ class mRedisSearch {
         });
 
         await Promise.all(promises);
-
-        return results;
+        if (results.length !== 0) return results;
+        return await this.fetchExternal(term);
     }
 
     async kanji(kanji) {
