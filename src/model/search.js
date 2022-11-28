@@ -8,7 +8,7 @@ class mRedisSearch {
 
     constructor() {
         // Config for heroku
-        this.redis = new Redis(process.env.REDIS_URL);
+        this.redis = new Redis("redis://red-ce24u7da4996ndufj4g0:6379");
         this.initializeDatabase();
     }
 
